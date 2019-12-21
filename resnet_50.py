@@ -98,7 +98,7 @@ def resnet50_model(img_rows, img_cols, color_type=1, num_classes=None):
 
     # Handle Dimension Ordering for different backends
     global bn_axis
-    if K.image_dim_ordering() == 'tf':
+    if K.common.image_dim_ordering() == 'tf':
         bn_axis = 3
         img_input = Input(shape=(img_rows, img_cols, color_type))
     else:
@@ -140,7 +140,7 @@ def resnet50_model(img_rows, img_cols, color_type=1, num_classes=None):
     model = Model(img_input, x_fc)
 
     # Load ImageNet pre-trained data 
-    if K.image_dim_ordering() == 'th':
+    if K.common.image_dim_ordering() == 'th':
         # Use pre-trained weights for Theano backend
         weights_path = 'models/resnet50_weights_th_dim_ordering_th_kernels.h5'
     else:
